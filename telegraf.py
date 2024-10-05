@@ -15,6 +15,14 @@ def recv_signal(bind_ip='0.0.0.0', bind_port=5919):
         data, addr = s.recvfrom(1024)
         print("Received: %s" % data)
 
+def get_input():
+    while True:
+        input("Press enter")
+        send_signal('127.0.0.1')
+
 if __name__ == "__main__":
-    receiver = threading.Thread(target=recv_signal())
-    receiver.start()g
+    receiver = threading.Thread(target=recv_signal)
+    receiver.start()
+    print("Receiver running")
+    sender = threading.Thread(target=get_input)
+    sender.start()
